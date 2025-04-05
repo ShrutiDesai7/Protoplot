@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Task Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Landing Page -->
+  <section id="landing" class="landing-page">
+    <div class="landing-content">
+      <h1 id="landingQuote"></h1>
+      <p class="subtext">Let’s make every action count 🌿</p>
+    </div>
+  </section>
+  
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">EcoTracker</div>
+    <ul class="nav-links">
+      <li><a href="#welcome">Home</a></li>
+      <li><a href="#form">Login</a></li>
+      <li><a href="#about">About</a></li>
+      <!-- Light/Dark Mode Toggle -->
+      <label class="switch">
+        <input type="checkbox" id="modeToggle" class="theme-toggle"/>
+        <span class="slider round"></span>
+      </label>
+      <span id="themeLabel">Light Mode</span>
+    </ul>
+  </nav>
+
+  <!-- Welcome Section -->
+  <section class="welcome-container" id="welcome">
+    <div class="welcome-content">
+      <div class="welcome-text">
+        <h1>Welcome to Sustainable Living Tracker 🌿</h1>
+        <p class="tagline">Your journey toward a greener planet begins today.</p>
+        <p>Track your eco-friendly habits, watch your tree grow, and stay motivated with inspiring quotes!</p>
+        <a href="#tracker" class="btn animated-btn">Start Tracking Now</a>
+      </div>
+      <div class="welcome-img">
+        <img src="earth.png" alt="Earth Illustration" />
+      </div>
+    </div>
+  </section>
+  
+  <!-- Login/Signup Form -->
+  <section class="form-container" id="form">
+    <h2>Login or Signup</h2>
+    <button class="btn" id="showLoginForm">Sign In</button>
+    <form id="loginForm" style="display: none;">
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <button type="submit" class="btn">Sign In</button>
+    </form>
+    <p>Don't have an account? <a href="#">Signup</a></p>
+  </section>
+
+  <!-- About Section -->
+  <section class="about-container" id="about">
+    <h2>About Us</h2>
+    <p>
+      At <strong>EcoTracker</strong>, we believe that small, consistent actions can lead to a big impact. 
+      Our mission is to empower individuals to adopt sustainable habits and contribute to a greener planet. 
+      By tracking your eco-friendly activities, you can visualize your progress and stay motivated to make a difference.
+    </p>
+    <p>
+      Together, we can create a community of environmentally conscious individuals who are committed to protecting our planet for future generations. 
+      Join us on this journey toward sustainability and let’s grow a better tomorrow, one habit at a time.
+    </p>
+  </section>
+
+  <!-- Eco-Awareness Game Section -->
+  <section id="ecoGame" class="eco-game-container">
+    <h2>Eco-Awareness Game</h2>
+    <p>Test your knowledge about sustainable living and learn how your choices impact the environment!</p>
+    <div id="gameQuestion" class="game-question">
+      <p>Click "Start Game" to begin!</p>
+    </div>
+    <div id="gameOptions" class="game-options"></div>
+    <button id="startGameButton" class="btn">Start Game</button>
+    <p id="gameFeedback" class="game-feedback"></p>
+  </section>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">EcoTracker</div>
+      <p>Making sustainable living easy and rewarding 🌱</p>
+      <ul class="footer-links">
+        <li><a href="#welcome">Home</a></li>
+        <li><a href="#form">Login</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+      <p class="footer-copyright">
+        &copy; 2025 EcoTracker. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

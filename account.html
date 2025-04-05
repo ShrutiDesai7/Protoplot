@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoTracker - Eco-Friendly Actions</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f1fbe7;
+      padding: 20px;
+      color: #2b4d27;
+    }
+    h1 {
+      text-align: center;
+      color: #3d7031;
+    }
+    .section {
+      margin-bottom: 20px;
+      padding: 15px;
+      border: 2px solid #a9d18e;
+      border-radius: 10px;
+      background-color: #ffffff;
+    }
+    .section label, .section input, .section button {
+      display: block;
+      margin: 8px 0;
+    }
+    button {
+      background-color: #6aaa64;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #558b2f;
+    }
+    #statusMessage {
+      font-weight: bold;
+      margin-top: 20px;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .green {
+      color: green;
+    }
+    .red {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🌍 EcoTracker</h1>
+  <p>Record your eco-friendly actions and see how green you're going!</p>
+
+  <!-- Recycling Section -->
+  <div class="section">
+    <h2>Recycling</h2>
+    <label for="recycling">Plastic bottles recycled:</label>
+    <input type="number" id="recycling" placeholder="Enter number of bottles">
+    <button onclick="recordAction('recycling')">Record</button>
+  </div>
+
+  <!-- Transportation Section -->
+  <div class="section">
+    <h2>Transportation</h2>
+    <label for="bike">Kilometers biked instead of driving:</label>
+    <input type="number" id="bike" placeholder="Enter kilometers">
+    <button onclick="recordAction('bike')">Record</button>
+  </div>
+
+  <!-- Energy Saving Section -->
+  <div class="section">
+    <h2>Energy Saving</h2>
+    <label for="lights">Hours you turned off extra lights:</label>
+    <input type="number" id="lights" placeholder="Enter hours">
+    <button onclick="recordAction('lights')">Record</button>
+  </div>
+
+  <!-- Check Eco Status -->
+  <button onclick="checkEcoStatus()">Check My Eco Status</button>
+
+  <!-- Status Message -->
+  <div id="statusMessage"></div>
+
+  <script>
+    // Data to track eco-friendly actions
+    const ecoData = {
+      recycling: 0,
+      bike: 0,
+      lights: 0
+    };
+
+    // Function to record actions
+    function recordAction(type) {
+      const input = document.getElementById(type);
+      const value = parseInt(input.value);
+      if (!isNaN(value) && value > 0) {
+        ecoData[type] += value;
+        alert("Recorded successfully!");
+        input.value = "";
+      } else {
+        alert("Please enter a valid number.");
+      }
+    }
+
+    // Function to check eco status
+    function checkEcoStatus() {
+      const total = ecoData.recycling + ecoData.bike + ecoData.lights;
+      const status = document.getElementById("statusMessage");
+
+      if (total === 0) {
+        status.innerHTML = "You haven't recorded any eco-friendly actions yet. Start today!";
+        status.className = "red";
+      } else if (total < 10) {
+        status.innerHTML = "You're getting started 🌱 Keep going green!";
+        status.className = "red";
+      } else if (total < 30) {
+        status.innerHTML = "Nice! You're making a difference 🌿";
+        status.className = "green";
+      } else {
+        status.innerHTML = "Awesome! You're an eco-champion 🌎💚";
+        status.className = "green";
+      }
+    }
+  </script>
+</body>
+</html>
