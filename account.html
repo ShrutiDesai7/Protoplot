@@ -50,6 +50,32 @@
     .red {
       color: red;
     }
+    /* Progress Bar Styles */
+    .progress-container {
+      margin-top: 30px;
+      text-align: center;
+    }
+    .progress-bar-container {
+      width: 80%;
+      max-width: 600px;
+      height: 30px;
+      background: #ddd;
+      border-radius: 15px;
+      overflow: hidden;
+      margin: 0 auto;
+      box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: #4caf50;
+      transition: width 0.5s ease-in-out;
+    }
+    .progress-text {
+      margin-top: 10px;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -81,6 +107,15 @@
     <button onclick="recordAction('lights')">Record</button>
   </div>
 
+  <!-- Progress Tracker -->
+  <div class="progress-container">
+    <h2>Your Progress</h2>
+    <div class="progress-bar-container">
+      <div class="progress-bar-fill" id="progressBar"></div>
+    </div>
+    <p class="progress-text" id="progressText">0% Complete</p>
+  </div>
+
   <!-- Check Eco Status -->
   <button onclick="checkEcoStatus()">Check My Eco Status</button>
 
@@ -103,9 +138,21 @@
         ecoData[type] += value;
         alert("Recorded successfully!");
         input.value = "";
+        updateProgress();
       } else {
         alert("Please enter a valid number.");
       }
+    }
+
+    // Function to update progress bar
+    function updateProgress() {
+      const total = ecoData.recycling + ecoData.bike + ecoData.lights;
+      const progress = Math.min((total / 50) * 100, 100); // Assuming 50 actions = 100% progress
+      const progressBar = document.getElementById("progressBar");
+      const progressText = document.getElementById("progressText");
+
+      progressBar.style.width = `${progress}%`;
+      progressText.textContent = `${Math.round(progress)}% Complete`;
     }
 
     // Function to check eco status
