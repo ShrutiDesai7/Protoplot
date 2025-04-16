@@ -39,7 +39,7 @@ header select {
   flex-direction: column;
   z-index: 9999;
   opacity: 1;
-  transition: opacity 3s ease-in-out;
+  transition: opacity 2s ease-in-out;
   font-family: 'Playfair Display', serif;
   color: white;
   text-align: center;
@@ -231,7 +231,7 @@ input:checked + .slider:before {
 .welcome-img img {
   width: 100%;
   max-width: 400px;
-  animation: float 4s ease-in-out infinite;
+  animation: float 3s ease-in-out infinite;
 }
 
 /* Animated Button */
@@ -440,10 +440,13 @@ input:checked + .slider:before {
 
 /* Form Section */
 .form-container {
-  padding: 50px 20px;
+  padding: 20px; /* Reduced padding */
   background: #c8e6c9;
-  min-height: 100vh;
+  min-height: 50vh; /* Decreased height */
+  width: 100%; /* Full width */
   text-align: center;
+  border-radius: 0; /* Removed rounded corners for full-width design */
+  box-shadow: none; /* Removed shadow for a cleaner look */
 }
 
 .form-container form {
@@ -783,5 +786,147 @@ body.dark button {
   0% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
   100% { transform: translateY(0px); }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+  }
+
+  .navbar .nav-links {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .navbar .nav-links li {
+    width: 100%;
+  }
+
+  .navbar .nav-links a {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #4caf50;
+    color: white;
+    text-align: left;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+
+  .navbar .nav-links a:hover {
+    background-color: #388e3c;
+  }
+
+  .theme-toggle {
+    margin-top: 10px;
+    align-self: flex-start;
+  }
+
+  .welcome-content {
+    flex-direction: column; /* Stack elements vertically */
+    text-align: center;
+  }
+
+  .welcome-img {
+    order: 2; /* Move the image below the text */
+    margin-top: 20px; /* Add spacing above the image */
+  }
+
+  .welcome-text {
+    order: 1; /* Ensure the text appears above the image */
+  }
+
+  .welcome-img img {
+    max-width: 300px; /* Adjust image size for smaller screens */
+  }
+
+  .welcome-img img {
+    max-width: 300px;
+  }
+
+  .task-input input {
+    width: 100%;
+  }
+
+  .task-list ul {
+    padding: 0 10px;
+  }
+
+  .eco-game-container {
+    padding: 20px;
+  }
+
+  .game-options button {
+    width: 100%;
+  }
+
+  .form-container form {
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .about-container {
+    padding: 20px;
+  }
+
+  .footer-links {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .progress-bar-container {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar .logo {
+    font-size: 1.5rem;
+  }
+
+  .welcome-text h1 {
+    font-size: 2rem;
+  }
+
+  .welcome-text p {
+    font-size: 1rem;
+  }
+
+  .animated-btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+
+  .task-list li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .task-list button {
+    width: 100%;
+    margin-top: 5px;
+  }
+
+  .eco-game-container h2 {
+    font-size: 1.5rem;
+  }
+
+  .eco-game-container p {
+    font-size: 1rem;
+  }
+
+  .footer-logo {
+    font-size: 1.5rem;
+  }
+
+  .footer-links a {
+    font-size: 0.9rem;
+  }
 }
 }
