@@ -121,6 +121,7 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
     window.location.href = "account.html";
 });
 
+
 // Selectors
 const frequencySelector = document.getElementById("frequencySelector");
 const taskInput = document.getElementById("taskInput");
@@ -219,88 +220,4 @@ frequencySelector.addEventListener("change", (e) => {
 updateTaskList();
 
 // Eco-Awareness Game Data
-const ecoGameQuestions = [
-  {
-    question: "What is the most eco-friendly way to dispose of food waste?",
-    options: ["Throw it in the trash", "Compost it", "Burn it"],
-    correct: 1,
-    feedback: [
-      "Throwing food waste in the trash contributes to methane emissions in landfills.",
-      "Correct! Composting reduces waste and creates nutrient-rich soil.",
-      "Burning food waste releases harmful pollutants into the air."
-    ]
-  },
-  {
-    question: "Which of these is the best way to conserve energy at home?",
-    options: ["Use LED bulbs", "Keep lights on all day", "Use incandescent bulbs"],
-    correct: 0,
-    feedback: [
-      "Correct! LED bulbs use significantly less energy and last longer.",
-      "Keeping lights on all day wastes energy unnecessarily.",
-      "Incandescent bulbs are inefficient and consume more energy."
-    ]
-  },
-  {
-    question: "What is the most sustainable way to shop for groceries?",
-    options: ["Buy local and seasonal produce", "Buy imported goods", "Use single-use plastic bags"],
-    correct: 0,
-    feedback: [
-      "Correct! Local and seasonal produce reduces transportation emissions.",
-      "Imported goods have a higher carbon footprint due to transportation.",
-      "Single-use plastic bags contribute to plastic pollution."
-    ]
-  }
-];
 
-let currentQuestionIndex = 0;
-
-// Selectors
-const gameQuestion = document.getElementById("gameQuestion");
-const gameOptions = document.getElementById("gameOptions");
-const gameFeedback = document.getElementById("gameFeedback");
-const startGameButton = document.getElementById("startGameButton");
-
-// Start Game
-startGameButton.addEventListener("click", () => {
-  currentQuestionIndex = 0;
-  gameFeedback.textContent = "";
-  startGameButton.style.display = "none";
-  loadQuestion();
-});
-
-// Load Question
-function loadQuestion() {
-  const questionData = ecoGameQuestions[currentQuestionIndex];
-  gameQuestion.textContent = questionData.question;
-  gameOptions.innerHTML = "";
-
-  questionData.options.forEach((option, index) => {
-    const button = document.createElement("button");
-    button.textContent = option;
-    button.addEventListener("click", () => checkAnswer(index));
-    gameOptions.appendChild(button);
-  });
-}
-
-// Check Answer
-function checkAnswer(selectedIndex) {
-  const questionData = ecoGameQuestions[currentQuestionIndex];
-  const isCorrect = selectedIndex === questionData.correct;
-
-  gameFeedback.textContent = questionData.feedback[selectedIndex];
-  gameFeedback.style.color = isCorrect ? "#2e7d32" : "#f44336";
-
-  if (isCorrect) {
-    currentQuestionIndex++;
-    if (currentQuestionIndex < ecoGameQuestions.length) {
-      setTimeout(loadQuestion, 2000); // Load next question after 2 seconds
-    } else {
-      setTimeout(() => {
-        gameQuestion.textContent = "Congratulations! You've completed the game!";
-        gameOptions.innerHTML = "";
-        startGameButton.textContent = "Play Again";
-        startGameButton.style.display = "inline-block";
-      }, 2000);
-    }
-  }
-}

@@ -81,7 +81,7 @@
 <body>
 
   <h1>🌍 EcoTracker</h1>
-  <p>Record your eco-friendly actions and see how green you're going!</p>
+  <p style="text-align: center;">Record your eco-friendly actions and see how green you're going!</p>
 
   <!-- Recycling Section -->
   <div class="section">
@@ -107,6 +107,22 @@
     <button onclick="recordAction('lights')">Record</button>
   </div>
 
+  <!-- Water Conservation Section -->
+  <div class="section">
+    <h2>Water Conservation</h2>
+    <label for="water">Liters of water saved by turning off taps:</label>
+    <input type="number" id="water" placeholder="Enter liters">
+    <button onclick="recordAction('water')">Record</button>
+  </div>
+
+  <!-- Food Waste Reduction Section -->
+  <div class="section">
+    <h2>Food Waste Reduction</h2>
+    <label for="food">Kilograms of food waste reduced:</label>
+    <input type="number" id="food" placeholder="Enter kilograms">
+    <button onclick="recordAction('food')">Record</button>
+  </div>
+
   <!-- Progress Tracker -->
   <div class="progress-container">
     <h2>Your Progress</h2>
@@ -127,7 +143,9 @@
     const ecoData = {
       recycling: 0,
       bike: 0,
-      lights: 0
+      lights: 0,
+      water: 0,
+      food: 0
     };
 
     // Function to record actions
@@ -136,7 +154,6 @@
       const value = parseInt(input.value);
       if (!isNaN(value) && value > 0) {
         ecoData[type] += value;
-        alert("Recorded successfully!");
         input.value = "";
         updateProgress();
       } else {
@@ -146,8 +163,8 @@
 
     // Function to update progress bar
     function updateProgress() {
-      const total = ecoData.recycling + ecoData.bike + ecoData.lights;
-      const progress = Math.min((total / 50) * 100, 100); // Assuming 50 actions = 100% progress
+      const total = ecoData.recycling + ecoData.bike + ecoData.lights + ecoData.water + ecoData.food;
+      const progress = Math.min((total / 100) * 100, 100); // Assuming 100 actions = 100% progress
       const progressBar = document.getElementById("progressBar");
       const progressText = document.getElementById("progressText");
 
@@ -155,22 +172,29 @@
       progressText.textContent = `${Math.round(progress)}% Complete`;
     }
 
+    // Function to calculate CO2 reduction estimate
+    function calculateCO2() {
+      const co2Saved = (ecoData.bike * 0.1) + (ecoData.recycling * 0.2) + (ecoData.lights * 0.05); // Example CO2 reduction values
+      return co2Saved;
+    }
+
     // Function to check eco status
     function checkEcoStatus() {
-      const total = ecoData.recycling + ecoData.bike + ecoData.lights;
+      const total = ecoData.recycling + ecoData.bike + ecoData.lights + ecoData.water + ecoData.food;
       const status = document.getElementById("statusMessage");
+      const co2Saved = calculateCO2();
 
       if (total === 0) {
         status.innerHTML = "You haven't recorded any eco-friendly actions yet. Start today!";
         status.className = "red";
       } else if (total < 10) {
-        status.innerHTML = "You're getting started 🌱 Keep going green!";
+        status.innerHTML = `You're getting started 🌱 Keep going green! CO2 Saved: ${co2Saved.toFixed(2)} kg`;
         status.className = "red";
       } else if (total < 30) {
-        status.innerHTML = "Nice! You're making a difference 🌿";
+        status.innerHTML = `Nice! You're making a difference 🌿 CO2 Saved: ${co2Saved.toFixed(2)} kg`;
         status.className = "green";
       } else {
-        status.innerHTML = "Awesome! You're an eco-champion 🌎💚";
+        status.innerHTML = `Awesome! You're an eco-champion 🌎💚 CO2 Saved: ${co2Saved.toFixed(2)} kg`;
         status.className = "green";
       }
     }

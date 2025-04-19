@@ -1,234 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eco Choices Game</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        /* General Styles */
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #f4f4f4;
-            padding-top: 50px;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        /* Game Container */
-        .game-container {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .game-container h1 {
-            font-size: 2rem;
-            color: #2e7d32;
-            margin-bottom: 20px;
-        }
-
-        /* Scenario Text */
-        #scenario {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        /* Choices Buttons */
-        .choices button {
-            margin: 5px;
-            padding: 10px 20px;
-            font-size: 1rem;
-            border-radius: 5px;
-            border: none;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-
-        .choices button:hover {
-            transform: scale(1.05);
-        }
-
-        .btn-success {
-            background-color: #4caf50;
-            color: white;
-        }
-
-        .btn-success:hover {
-            background-color: #388e3c;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: #0056b3;
-        }
-
-        /* Feedback Section */
-        #feedback {
-            margin-top: 20px;
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-
-        .impact-positive {
-            color: green;
-        }
-
-        .impact-negative {
-            color: red;
-        }
-
-        /* Score Section */
-        #score {
-            margin-top: 15px;
-            font-size: 1.2rem;
-            color: #007bff;
-            font-weight: bold;
-        }
-
-        /* Link to Home Page */
-        .btn-link {
-            font-size: 1.1rem;
-            color: #2e7d32;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .btn-link:hover {
-            color: #1b5e20;
-            text-decoration: underline;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sustainability Quiz Challenge</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: #f1f8e9;
+      font-family: 'Arial', sans-serif;
+    }
+    .card {
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      background-color: #ffffff;
+    }
+    h1 {
+      font-family: 'Georgia', serif;
+      font-size: 2.5rem;
+      color: #388e3c;
+    }
+    .option {
+      font-size: 1.1rem;
+      border-radius: 25px;
+      transition: background-color 0.3s;
+    }
+    .option:hover {
+      background-color: #c8e6c9;
+      cursor: pointer;
+    }
+    .correct {
+      background-color: #81c784 !important;
+    }
+    .wrong {
+      background-color: #e57373 !important;
+    }
+    .progress-bar {
+      background-color: #66bb6a;
+    }
+    .next-btn {
+      background-color: #388e3c;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+    .next-btn:disabled {
+      background-color: #c8e6c9;
+    }
+    .next-btn:hover {
+      background-color: #2e7d32;
+    }
+    .restart-btn {
+      background-color: rgb(3, 182, 3);
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-size: 1.1rem;
+    }
+    .restart-btn:hover {
+      background-color: rgb(3, 182, 3);
+    }
+    #score {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #388e3c;
+    }
+    .score-up {
+      color: green;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Game Container -->
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="game-container">
-                    <h1 class="text-success">Make Eco Choices!</h1>
-                    <div id="scenario" class="mb-4"></div>
-                    <div id="choices" class="choices"></div>
-                    <div id="feedback"></div>
-                    <div id="score" class="mt-3">Score: 0</div>
-                    <button class="btn btn-primary mt-3" onclick="nextQuestion()">Next Question</button>
-                </div>
-            </div>
-        </div>
 
-        <!-- Link to Home Page -->
-        <div class="row justify-content-center">
-            <div class="col-md-8 text-center">
-                <a href="index.html" class="btn btn-link">Go to Home Page</a>
-            </div>
+  <div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card p-5 col-md-8 col-lg-6">
+      <h1 class="text-center mb-4">🌍 Sustainability Quiz Challenge!</h1>
+      <div id="progressBarContainer">
+        <div class="progress" style="height: 20px;">
+          <div class="progress-bar" role="progressbar" style="width: 0%" id="progressBar"></div>
         </div>
+      </div>
+      <h5 id="question" class="mt-4 text-center">Loading question...</h5>
+      <div id="options" class="my-3"></div>
+      <div class="d-flex justify-content-between mt-4">
+        <p id="score">Score: 0/5</p>
+        <button class="next-btn" id="nextBtn" onclick="nextQuestion()" disabled>Next</button>
+      </div>
     </div>
+  </div>
 
-    <!-- Bootstrap JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        const scenarios = [
-            {
-                text: "You are leaving a room. What do you do?",
-                choices: [
-                    { text: "Leave the lights on 'just in case'.", impact: -5, feedback: "Leaving lights on wastes energy. Every little bit adds up!" },
-                    { text: "Turn off the lights.", impact: 10, feedback: "Great! Turning off lights saves energy and reduces your carbon footprint." }
-                ]
-            },
-            {
-                text: "You need to buy groceries. How do you carry them?",
-                choices: [
-                    { text: "Take new plastic bags from the store.", impact: -8, feedback: "Single-use plastic bags contribute to pollution. Try to avoid them!" },
-                    { text: "Use your own reusable bags.", impact: 12, feedback: "Excellent! Reusable bags help reduce plastic waste." }
-                ]
-            },
-            {
-                text: "Your phone charger is plugged into the wall but not connected to your phone.",
-                choices: [
-                    { text: "Leave it plugged in.", impact: -3, feedback: "Even when not charging, plugged-in devices can still draw 'phantom' energy." },
-                    { text: "Unplug it.", impact: 7, feedback: "Good job! Unplugging devices saves energy." }
-                ]
-            },
-            {
-                text: "You have leftover food after dinner.",
-                choices: [
-                    { text: "Throw it in the trash.", impact: -10, feedback: "Food waste contributes to greenhouse gas emissions in landfills. Try to compost or repurpose leftovers!" },
-                    { text: "Store it properly to eat later.", impact: 15, feedback: "Fantastic! Reducing food waste is a great way to be more sustainable." }
-                ]
-            },
-            {
-                text: "You are buying a new beverage.",
-                choices: [
-                    { text: "Choose a single-use plastic bottle.", impact: -7, feedback: "Single-use plastics have a significant environmental impact. Consider reusable options." },
-                    { text: "Choose a reusable water bottle or a can (which is often more recyclable).", impact: 10, feedback: "Great choice! Reusable bottles and cans are better for the environment." }
-                ]
-            }
-        ];
+  <script>
+    const questions = [
+      {
+        question: "Which of these is a renewable energy source?",
+        options: ["Coal", "Solar", "Natural Gas", "Petrol"],
+        answer: "Solar"
+      },
+      {
+        question: "Which practice helps reduce carbon emissions?",
+        options: ["Using plastic bags", "Carpooling", "Eating beef daily", "Leaving lights on"],
+        answer: "Carpooling"
+      },
+      {
+        question: "What does 'reduce' in 3Rs stand for?",
+        options: ["Use more", "Recycle items", "Lower usage", "Reuse everything"],
+        answer: "Lower usage"
+      },
+      {
+        question: "Which item is biodegradable?",
+        options: ["Plastic cup", "Styrofoam", "Banana peel", "Aluminum can"],
+        answer: "Banana peel"
+      },
+      {
+        question: "Best way to conserve water at home?",
+        options: ["Let tap run", "Fix leaks", "Take long showers", "Ignore dripping faucets"],
+        answer: "Fix leaks"
+      }
+    ];
 
-        let currentQuestionIndex = 0;
-        let score = 0;
+    let current = 0;
+    let score = 0;
 
-        const scenarioElement = document.getElementById("scenario");
-        const choicesElement = document.getElementById("choices");
-        const feedbackElement = document.getElementById("feedback");
-        const scoreElement = document.getElementById("score");
-        const nextButton = document.querySelector("button");
+    function loadQuestion() {
+      const q = questions[current];
+      document.getElementById("question").textContent = q.question;
 
-        function displayQuestion() {
-            const currentScenario = scenarios[currentQuestionIndex];
-            scenarioElement.textContent = currentScenario.text;
-            choicesElement.innerHTML = "";
-            feedbackElement.textContent = "";
-            nextButton.style.display = "none";
+      const optionsDiv = document.getElementById("options");
+      optionsDiv.innerHTML = "";
 
-            currentScenario.choices.forEach((choice, index) => {
-                const button = document.createElement("button");
-                button.textContent = choice.text;
-                button.className = "btn btn-success";
-                button.onclick = () => checkAnswer(choice);
-                choicesElement.appendChild(button);
-            });
-        }
+      q.options.forEach(opt => {
+        const btn = document.createElement("button");
+        btn.className = "btn btn-outline-success m-2 option w-100";
+        btn.textContent = opt;
+        btn.onclick = () => checkAnswer(btn, opt);
+        optionsDiv.appendChild(btn);
+      });
 
-        function checkAnswer(choice) {
-            score += choice.impact;
-            scoreElement.textContent = `Score: ${score}`;
-            feedbackElement.textContent = choice.feedback;
-            if (choice.impact > 0) {
-                feedbackElement.className = "impact-positive";
-            } else {
-                feedbackElement.className = "impact-negative";
-            }
-            choicesElement.innerHTML = "";
-            nextButton.style.display = "block";
-        }
+      document.getElementById("nextBtn").disabled = true;
+    }
 
-        function nextQuestion() {
-            currentQuestionIndex++;
-            if (currentQuestionIndex < scenarios.length) {
-                displayQuestion();
-            } else {
-                scenarioElement.textContent = "Game Over! Your final score is:";
-                choicesElement.innerHTML = "";
-                feedbackElement.textContent = "";
-                nextButton.style.display = "none";
-                scoreElement.textContent = `Final Score: ${score}`;
-            }
-        }
+    function checkAnswer(btn, selected) {
+      const correctAns = questions[current].answer;
+      const allBtns = document.querySelectorAll(".option");
 
-        displayQuestion(); // Start the first question
-    </script>
+      allBtns.forEach(b => {
+        b.disabled = true;
+        if (b.textContent === correctAns) b.classList.add("correct");
+        else if (b.textContent === selected) b.classList.add("wrong");
+      });
+
+      if (selected === correctAns) {
+        score++;
+        document.getElementById("score").textContent = `Score: ${score}/5`;
+        document.getElementById("score").classList.add('score-up'); // Highlight score
+      } else {
+        document.getElementById("score").classList.remove('score-up'); // Reset highlight if wrong
+      }
+
+      document.getElementById("nextBtn").disabled = false;
+      updateProgressBar();
+    }
+
+    function nextQuestion() {
+      current++;
+      if (current < questions.length) {
+        loadQuestion();
+      } else {
+        document.querySelector(".card").innerHTML = `
+          <h2 class="text-center text-success">🎉 Quiz Completed!</h2>
+          <p class="text-center mt-3">Your final score is <strong>${score} out of ${questions.length}</strong>.</p>
+          <button class="restart-btn" onclick="restart()">Play Again</button>
+        `;
+      }
+    }
+
+    function updateProgressBar() {
+      const progress = ((current + 1) / questions.length) * 100;
+      document.getElementById("progressBar").style.width = progress + "%";
+    }
+
+    function restart() {
+      current = 0;
+      score = 0;
+      document.querySelector(".card").innerHTML = `
+        <h1 class="text-center mb-4">🌍 Sustainability Quiz Challenge!</h1>
+        <div id="progressBarContainer">
+          <div class="progress" style="height: 20px;">
+            <div class="progress-bar" role="progressbar" style="width: 0%" id="progressBar"></div>
+          </div>
+        </div>
+        <h5 id="question" class="mt-4 text-center">Loading question...</h5>
+        <div id="options" class="my-3"></div>
+        <div class="d-flex justify-content-between mt-4">
+          <p id="score">Score: 0/5</p>
+          <button class="next-btn" id="nextBtn" onclick="nextQuestion()" disabled>Next</button>
+        </div>
+      `;
+      loadQuestion();
+    }
+
+    loadQuestion();
+  </script>
+
 </body>
 </html>
